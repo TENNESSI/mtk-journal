@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49a582eb-959d-4726-881c-6461ef95c8b3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/create_row.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/instance/test.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/goods.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/goods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/newgood.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/newgood.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,20 +41,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.app.executor": "Run",
-    "Python.create_admin.executor": "Run",
-    "Python.create_db.executor": "Run",
-    "Python.create_row.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/mtk-journal",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_admin.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_row.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/mtk-journal&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

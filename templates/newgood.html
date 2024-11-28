@@ -15,7 +15,7 @@
 		Время<br>
 		<input type="text" name='time'><br>
 		Наименование организации<br>
-		<input type="text" name='orgname'><br>
+		<input type="text" name='orgname'><br><br>
 		Оплата<br>
 		        <label for="size">Выберите:</label>
           <select id="size" name="size_id">
@@ -24,14 +24,16 @@
               {% endfor %}
           </select><br>
 		Количество людей<br>
-		<input type="text" name='peoples'><br>
+		<input type="text" name='peoples'><br><br>
         Название выставки<br>
 		        <label for="category">Выберите:</label>
           <select id="category" name="category_id">
               {% for category in categories %}
             <option value="{{category.category_id}}">{{category.category_name}}</option>
               {% endfor %}
-          </select><br>
+          </select><br><br>
+		<label for="date">Дата посещения:</label>
+		<input type="date" id="date" name="date" value="2024-11-28" min="2024-11-28" max="2025-12-31" /><br><br>
         Контактный телефон<br>
 		<input type="text" name='phone'><br>
 		ФИО руководителя группы<br>

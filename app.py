@@ -86,14 +86,16 @@ def admin_login():
                 return render_template('admin_login.html')
 
             login_user(admin)
-            session['user_id'] = admin.admin_id
-            return render_template('admin_panel.html')
+            session['username'] = admin.admin_name
+            autor = session['username']
+            return render_template('admin_panel.html',autor=autor)
         else:
             flash('Пользователя не существует.')
-    if 'user_id' not in session:
+    if 'username' not in session:
         return render_template('admin_login.html')
     else:
-        return render_template('admin_panel.html')
+        autor = session['username']
+        return render_template('admin_panel.html',autor=autor)
 
 @app.route('/out')
 def out():
@@ -102,15 +104,16 @@ def out():
 
 @app.route('/admin/categories', methods=['GET'])
 def categories():
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect('/admin')
     else:
         categories = Category.query.order_by(desc(Category.created_on)).all()
-        return render_template('categories.html',categories=categories)
+        autor = session['username']
+        return render_template('categories.html',categories=categories, autor=autor)
 
 @app.route('/admin/categories/add', methods=['GET','POST'])
 def add_category():
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect('/admin')
     else:
         if request.method == 'POST':
@@ -126,22 +129,27 @@ def add_category():
                     return redirect((url_for('categories')))
             else:
                 flash('Ошибка, длина полей не соответствует стандартам.')
-        return render_template('newcategory.html')
+        autor = session['username']
+        return render_template('newcategory.html',autor=autor)
 
 @app.route('/admin/goods', methods=['GET','POST'])
 def goods():
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect('/admin')
     else:
+        autor = session['username']
         goods = Goods.query.order_by(desc(Goods.created_on)).all()
+        sizes = {}
         categories = {}
+        for size in Size.query.order_by(desc(Size.created_on)).all():
+            sizes.update({size.size_id: size.size_name})
         for category in Category.query.order_by(desc(Category.created_on)).all():
             categories.update({category.category_id: category.category_name})
-        return render_template('goods.html', goods=goods, categories=categories)
+        return render_template('goods.html', goods=goods, categories=categories, sizes=sizes, autor=autor)
 
 @app.route('/admin/goods/add', methods=['GET', 'POST'])
 def new_good():
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect('/admin')
     else:
         if request.method == 'POST':
@@ -152,9 +160,12 @@ def new_good():
             category_id = request.form['category_id']
             phone = request.form['phone']
             fio = request.form['fio']
+            autor = session['username']
+            date = request.form['date']
+            print(date)
 
             if len(time) > 0 and len(orgname) < 256:
-                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor='pass')
+                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor=autor)
 
                 try:
                     db.session.add(goods)
@@ -165,13 +176,14 @@ def new_good():
                     return redirect((url_for('goods')))
             else:
                 flash('Ошибка, длина полей не соответствует стандартам.')
+        autor = session['username']
         categories = Category.query.order_by(desc(Category.created_on)).all()
         sizes = Size.query.order_by(desc(Size.created_on)).all()
-        return render_template('newgood.html', categories = categories, sizes=sizes)
+        return render_template('newgood.html', categories = categories, sizes=sizes,autor=autor)
 
 @app.route('/admin/sizes', methods = ['GET'])
 def sizes():
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect('/admin')
     else:
         sizes = Size.query.order_by(desc(Size.created_on)).all()
@@ -179,20 +191,23 @@ def sizes():
 
 @app.route('/admin/sizes/add', methods = ['GET', 'POST'])
 def add_sizes():
-    if request.method == 'POST':
-        size_name = request.form['size_name']
-        if len(size_name) > 0 and len(size_name) < 256:
-            size = Size(size_name=size_name)
-            try:
-                db.session.add(size)
-                db.session.commit()
-            except Exception as e:
-                flash(f'Возникла ошибка при записи в базу данных: {e}')
+    if 'username' not in session:
+        return redirect('/admin')
+    else:
+        if request.method == 'POST':
+            size_name = request.form['size_name']
+            if len(size_name) > 0 and len(size_name) < 256:
+                size = Size(size_name=size_name)
+                try:
+                    db.session.add(size)
+                    db.session.commit()
+                except Exception as e:
+                    flash(f'Возникла ошибка при записи в базу данных: {e}')
+                else:
+                    return redirect((url_for('sizes')))
             else:
-                return redirect((url_for('sizes')))
-        else:
-            flash('Ошибка, длина полей не соответствует стандартам.')
-    return render_template('newsize.html')
+                flash('Ошибка, длина полей не соответствует стандартам.')
+        return render_template('newsize.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True, port=5000)
