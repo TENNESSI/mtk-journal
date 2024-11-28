@@ -1,0 +1,21 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h1 class="h2">Добавление размера</h1>
+	</div>
+	<form method="post" enctype="multipart/form-data">
+		{% for msg in get_flashed_messages() %}
+			<div class="error">
+				{{ msg }}
+			</div>
+		{% endfor %}
+
+		Наименование размера<br>
+		<input type="text" name='size_name'><br>
+		<input type="submit" class='btn' value="Добавить">
+		<br>
+	</form>
+</div>
+{% endblock %}

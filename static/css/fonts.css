@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600&subset=cyrillic');
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 300;
+	src: url('../fonts/FuturaPTLight.eot');
+	src: url('../fonts/FuturaPTLight.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTLight.woff2') format('woff2'),
+		 url('../fonts/FuturaPTLight.woff') format('woff'),
+		 url('../fonts/FuturaPTLight.ttf') format('truetype'),
+		 url('../fonts/FuturaPTLight.svg#FuturaPTLight') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 400;
+	src: url('../fonts/FuturaPTBook.eot');
+	src: url('../fonts/FuturaPTBook.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTBook.woff2') format('woff2'),
+		 url('../fonts/FuturaPTBook.woff') format('woff'),
+		 url('../fonts/FuturaPTBook.ttf') format('truetype'),
+		 url('../fonts/FuturaPTBook.svg#FuturaPTBook') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 500;
+	src: url('../fonts/FuturaPTMedium.eot');
+	src: url('../fonts/FuturaPTMedium.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTMedium.woff2') format('woff2'),
+		 url('../fonts/FuturaPTMedium.woff') format('woff'),
+		 url('../fonts/FuturaPTMedium.ttf') format('truetype'),
+		 url('../fonts/FuturaPTMedium.svg#FuturaPTMedium') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 600;
+	src: url('../fonts/FuturaPTDemi.eot');
+	src: url('../fonts/FuturaPTDemi.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTDemi.woff2') format('woff2'),
+		 url('../fonts/FuturaPTDemi.woff') format('woff'),
+		 url('../fonts/FuturaPTDemi.ttf') format('truetype'),
+		 url('../fonts/FuturaPTDemi.svg#FuturaPTDemi') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 700;
+	src: url('../fonts/FuturaPTHeavy.eot');
+	src: url('../fonts/FuturaPTHeavy.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTHeavy.woff2') format('woff2'),
+		 url('../fonts/FuturaPTHeavy.woff') format('woff'),
+		 url('../fonts/FuturaPTHeavy.ttf') format('truetype'),
+		 url('../fonts/FuturaPTHeavy.svg#FuturaPTHeavy') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Futura PT';
+	font-weight: 800;
+	src: url('../fonts/FuturaPTBold.eot');
+	src: url('../fonts/FuturaPTBold.eot') format('embedded-opentype'),
+		 url('../fonts/FuturaPTBold.woff2') format('woff2'),
+		 url('../fonts/FuturaPTBold.woff') format('woff'),
+		 url('../fonts/FuturaPTBold.ttf') format('truetype'),
+		 url('../fonts/FuturaPTBold.svg#FuturaPTBold') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Proxima Nova';
+	font-weight: 300;
+	src: url('../fonts/ProximaNovaLight.eot');
+	src: url('../fonts/ProximaNovaLight.eot') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaLight.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaLight.woff') format('woff'),
+		 url('../fonts/ProximaNovaLight.ttf') format('truetype'),
+		 url('../fonts/ProximaNovaLight.svg#ProximaNovaLight') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Proxima Nova';
+	font-weight: 400;
+	src: url('../fonts/ProximaNovaRegular.eot');
+	src: url('../fonts/ProximaNovaRegular.eot') format('embedded-opentype'),
+		 url('../fonts/ProximaNovaRegular.woff2') format('woff2'),
+		 url('../fonts/ProximaNovaRegular.woff') format('woff'),
+		 url('../fonts/ProximaNovaRegular.ttf') format('truetype'),
+		 url('../fonts/ProximaNovaRegular.svg#ProximaNovaRegular') format('svg');
+}
+
+
+@font-face {
+	font-family: 'Core Sans G';
+	font-weight: 500;
+	src: url('../fonts/CoreSansGMedium.eot');
+	src: url('../fonts/CoreSansGMedium.eot') format('embedded-opentype'),
+		 url('../fonts/CoreSansGMedium.woff2') format('woff2'),
+		 url('../fonts/CoreSansGMedium.woff') format('woff'),
+		 url('../fonts/CoreSansGMedium.ttf') format('truetype'),
+		 url('../fonts/CoreSansGMedium.svg#CoreSansGMedium') format('svg');
+}

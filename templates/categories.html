@@ -1,0 +1,27 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Мероприятия</h1>
+            </div>
+            <a href="/admin/categories/add">Добавить мероприятие</a>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Наименование</th>
+                  <th scope="col">Дата добавления</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for category in categories %}
+                    <tr>
+                      <th scope="row">{{ category.category_id }}</th>
+                      <td>{{ category.category_name }}</td>
+                      <td>{{ category.created_on }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+{% endblock %}

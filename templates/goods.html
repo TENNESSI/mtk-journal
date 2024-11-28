@@ -1,0 +1,39 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Записи</h1>
+            </div>
+            <a href="/admin/goods/add">Добавить запись</a>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Время</th>
+                  <th scope="col">Наименование организации</th>
+                  <th scope="col">Оплата</th>
+                  <th scope="col">Кол-во людей</th>
+                  <th scope="col">Название выставки</th>
+                  <th scope="col">Контактный телефон</th>
+                  <th scope="col">Ф.И.О. руководителя группы</th>
+                  <th scope="col">Дата добавления</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for good in goods %}
+                    <tr>
+                      <th scope="row">{{ good.goods_id }}</th>
+                      <td>{{ good.time }}</td>
+                      <td>{{ good.orgname }}</td>
+                      <td>{{ pass }}</td>
+                      <td>{{ good.peoples }}</td>
+                      <td>{{ pass }}</td>
+                      <td>{{ good.phone }}</td>
+                      <td>{{ good.fio }}</td>
+                      <td>{{ good.created_on }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+{% endblock %}
