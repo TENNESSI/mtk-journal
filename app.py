@@ -138,7 +138,11 @@ def goods():
         return redirect('/admin')
     else:
         autor = session['username']
-        goods = Goods.query.order_by(desc(Goods.created_on)).all()
+        goods = []
+        for good in Goods.query.order_by(desc(Goods.created_on)).all():
+            goods.append(good.date)
+        goods = list(dict.fromkeys(goods))
+        print(goods)
         sizes = {}
         categories = {}
         for size in Size.query.order_by(desc(Size.created_on)).all():
@@ -162,10 +166,9 @@ def new_good():
             fio = request.form['fio']
             autor = session['username']
             date = request.form['date']
-            print(date)
 
             if len(time) > 0 and len(orgname) < 256:
-                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor=autor)
+                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor=autor,date=date)
 
                 try:
                     db.session.add(goods)
@@ -208,6 +211,20 @@ def add_sizes():
             else:
                 flash('Ошибка, длина полей не соответствует стандартам.')
         return render_template('newsize.html')
+
+@app.route('/admin/goods/<string:date>', methods = ['GET'])
+def get_good_for_date(date):
+    if 'username' not in session:
+        return redirect('/admin')
+    else:
+        goods = Goods.query.filter_by(date=date).all()
+        sizes = {}
+        categories = {}
+        for size in Size.query.order_by(desc(Size.created_on)).all():
+            sizes.update({size.size_id: size.size_name})
+        for category in Category.query.order_by(desc(Category.created_on)).all():
+            categories.update({category.category_id: category.category_name})
+        return render_template('goodcard.html', goods=goods,sizes=sizes,categories=categories)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True, port=5000)
