@@ -47,7 +47,7 @@ class Goods(db.Model):
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return "<{}:{}>".format(self.goods_id, self.goodsname)
+        return "<{}:{}>".format(self.goods_id, self.date)
 
 class Category(db.Model):
     category_id = db.Column(db.Integer, primary_key=True)
@@ -66,14 +66,28 @@ def load_user(id):
 @app.route('/')
 @app.route('/index')
 def index():
+    goods = []
+    for good in Goods.query.order_by(desc(Goods.created_on)).all():
+        goods.append(good.date)
+    goods = list(dict.fromkeys(goods))
     sizes = {}
     categories = {}
     for size in Size.query.order_by(desc(Size.created_on)).all():
         sizes.update({size.size_id: size.size_name})
     for category in Category.query.order_by(desc(Category.created_on)).all():
         categories.update({category.category_id: category.category_name})
-    goods = Goods.query.order_by(desc(Goods.created_on)).all()
     return render_template('index.html', goods=goods, categories=categories, sizes=sizes)
+
+@app.route('/<string:date>')
+def show_goods(date):
+    goods = Goods.query.filter_by(date=date).all()
+    sizes = {}
+    categories = {}
+    for size in Size.query.order_by(desc(Size.created_on)).all():
+        sizes.update({size.size_id: size.size_name})
+    for category in Category.query.order_by(desc(Category.created_on)).all():
+        categories.update({category.category_id: category.category_name})
+    return render_template('goodcard_noadmin.html', goods=goods, sizes=sizes, categories=categories)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
@@ -142,7 +156,6 @@ def goods():
         for good in Goods.query.order_by(desc(Goods.created_on)).all():
             goods.append(good.date)
         goods = list(dict.fromkeys(goods))
-        print(goods)
         sizes = {}
         categories = {}
         for size in Size.query.order_by(desc(Size.created_on)).all():
@@ -225,6 +238,55 @@ def get_good_for_date(date):
         for category in Category.query.order_by(desc(Category.created_on)).all():
             categories.update({category.category_id: category.category_name})
         return render_template('goodcard.html', goods=goods,sizes=sizes,categories=categories)
+
+@app.route('/admin/goods/<string:date>/<int:goods_id>', methods = ['GET','POST'])
+def edit(goods_id,date):
+    if 'username' not in session:
+        return redirect('/admin')
+    else:
+        good = Goods.query.get(goods_id)
+        if request.method == 'POST':
+            good.time = request.form['time']
+            good.orgname = request.form['orgname']
+            good.size_id = request.form['size_id']
+            good.peoples = request.form['peoples']
+            good.category_id = request.form['category_id']
+            good.phone = request.form['phone']
+            good.fio = request.form['fio']
+            good.autor = session['username']
+            good.date = request.form['date']
+
+            if len(good.time) > 0 and len(good.orgname) < 256:
+                try:
+                    db.session.commit()
+                except Exception as e:
+                    flash(f'Возникла ошибка при записи в базу данных: {e}')
+                else:
+                    return redirect(f'/admin/goods/{date}')
+            else:
+                flash('Ошибка, длина полей не соответствует стандартам.')
+        autor = session['username']
+        categories = Category.query.order_by(desc(Category.created_on)).all()
+        sizes = Size.query.order_by(desc(Size.created_on)).all()
+        return render_template('edit.html', categories=categories, sizes=sizes, autor=autor, good=good)
+
+@app.route('/admin/goods/<string:date>/<int:goods_id>/delete', methods = ['GET'])
+def delete(goods_id,date):
+    if 'username' not in session:
+        return redirect('/admin')
+    else:
+        good = Goods.query.get(goods_id)
+        try:
+            db.session.delete(good)
+            db.session.commit()
+        except Exception as _e:
+            flash(f'Ошибка удаления записи: {_e}')
+            return redirect(f'/admin/goods/{date}')
+        else:
+            if Goods.query.filter_by(date=date).all() == []:
+                return redirect('/admin/goods')
+            else:
+                return redirect(f'/admin/goods/{date}')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True, port=5000)

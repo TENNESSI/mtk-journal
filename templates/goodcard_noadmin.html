@@ -1,11 +1,10 @@
-{% extends 'base_admin.html' %}
-
 {% block content %}
+        <a href="/">На главную</a>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Записи</h1>
             </div>
-            <a href="/admin/goods/add">Добавить запись</a>
             <table class="table">
               <thead class="thead-dark">
                 <tr>
@@ -24,9 +23,7 @@
               <tbody>
                 {% for good in goods %}
                     <tr>
-                      <th scope="row">
-                          <a href="/admin/goods/{{good.date}}/{{good.goods_id}}">{{ good.goods_id }}</a>
-                      </th>
+                      <th scope="row">{{ good.goods_id }}</th>
                       <td>{{ good.time }}</td>
                       <td>{{ good.orgname }}</td>
                       <td>{{ sizes.get(good.size_id) }}</td>
@@ -36,11 +33,6 @@
                       <td>{{ good.fio }}</td>
                       <td>{{ good.autor }}</td>
                       <td>{{ good.created_on }}</td>
-                      <td>
-                          <div class="delete">
-                              <a href="/admin/goods/{{good.date}}/{{good.goods_id}}/delete">Удалить</a>
-                          </div>
-                      </td>
                     </tr>
                 {% endfor %}
               </tbody>

@@ -1,0 +1,45 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h1 class="h2">Новая запись</h1>
+	</div>
+	<form method="post" enctype="multipart/form-data">
+		{% for msg in get_flashed_messages() %}
+			<div class="error">
+				{{ msg }}
+			</div>
+		{% endfor %}
+
+		Время<br>
+		<input type="text" name='time' value="{{good.time}}"><br>
+		Наименование организации<br>
+		<input type="text" name='orgname' value="{{good.orgname}}"><br><br>
+		Оплата<br>
+		        <label for="size">Выберите:</label>
+          <select id="size" name="size_id">
+              {% for size in sizes %}
+            <option value="{{size.size_id}}">{{size.size_name}}</option>
+              {% endfor %}
+          </select><br>
+		Количество людей<br>
+		<input type="text" name='peoples' value="{{good.peoples}}"><br><br>
+        Название выставки<br>
+		        <label for="category">Выберите:</label>
+          <select id="category" name="category_id">
+              {% for category in categories %}
+            <option value="{{category.category_id}}">{{category.category_name}}</option>
+              {% endfor %}
+          </select><br><br>
+		<label for="date">Дата посещения:</label>
+		<input type="date" id="date" name="date" value="{{good.date}}" min="2024-11-28" max="2025-12-31" /><br><br>
+        Контактный телефон<br>
+		<input type="text" name='phone' value="{{good.phone}}"><br>
+		ФИО руководителя группы<br>
+		<input type="text" name='fio' value="{{good.fio}}"><br>
+		<input type="submit" class='btn' value="Сохранить">
+		<br>
+	</form>
+</div>
+{% endblock %}

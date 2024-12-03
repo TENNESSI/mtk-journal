@@ -1,8 +1,8 @@
 from app import Admin, db, app
 
 with app.app_context():
-	username = "Соня"
-	password = "12345"
+	username = "Admin"
+	password = "123456"
 	try:
 		admin = Admin(admin_name=username)
 		admin.set_password(password)
