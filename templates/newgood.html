@@ -12,8 +12,13 @@
 			</div>
 		{% endfor %}
 
-		Время<br>
-		<input type="text" name='time'><br>
+		Время посещения<br>
+		        <label for="time">Выберите:</label>
+          <select id="time" name="time">
+              {% for time in times %}
+            <option value="{{time}}">{{time}}</option>
+              {% endfor %}
+          </select><br><br>
 		Наименование организации<br>
 		<input type="text" name='orgname'><br><br>
 		Оплата<br>
@@ -22,7 +27,7 @@
               {% for size in sizes %}
             <option value="{{size.size_id}}">{{size.size_name}}</option>
               {% endfor %}
-          </select><br>
+          </select><br><br>
 		Количество людей<br>
 		<input type="text" name='peoples'><br><br>
         Название выставки<br>
@@ -38,6 +43,8 @@
 		<input type="text" name='phone'><br>
 		ФИО руководителя группы<br>
 		<input type="text" name='fio'><br>
+		Примечания<br>
+		<input type="text" name='description'><br>
 		<input type="submit" class='btn' value="Добавить">
 		<br>
 	</form>

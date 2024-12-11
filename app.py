@@ -16,6 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SECRET_KEY'] = 'secretkey'
 app.config['UPLOAD_FOLDER'] = 'uploadimg'
 db = SQLAlchemy(app)
+times = ['11:00','11:15','11:30','11:45','12:00','12:15','12:30','12:45','13:00','13:15','13:30','13:45','14:00','14:15','14:30','14:45','15:00','15:15','15:30','15:45','16:00','16:15','16:30','16:45','17:00','17:15','17:30','17:45','18:00']
 
 class Admin(UserMixin, db.Model):
     __tablename__ = "admins"
@@ -44,6 +45,7 @@ class Goods(db.Model):
     orgname = db.Column(db.String(100), nullable=True)
     fio = db.Column(db.String(), nullable=True)
     autor = db.Column(db.String, nullable=False)
+    description = db.Column(db.String(), nullable=True)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -87,7 +89,7 @@ def show_goods(date):
         sizes.update({size.size_id: size.size_name})
     for category in Category.query.order_by(desc(Category.created_on)).all():
         categories.update({category.category_id: category.category_name})
-    return render_template('goodcard_noadmin.html', goods=goods, sizes=sizes, categories=categories)
+    return render_template('goodcard_noadmin.html', goods=goods, sizes=sizes, categories=categories,date=date)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
@@ -179,9 +181,10 @@ def new_good():
             fio = request.form['fio']
             autor = session['username']
             date = request.form['date']
+            description = request.form['description']
 
             if len(time) > 0 and len(orgname) < 256:
-                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor=autor,date=date)
+                goods = Goods(time=time, orgname=orgname, size_id=size_id, peoples=peoples, category_id=category_id, phone=phone, fio=fio, autor=autor,date=date,description=description)
 
                 try:
                     db.session.add(goods)
@@ -195,7 +198,7 @@ def new_good():
         autor = session['username']
         categories = Category.query.order_by(desc(Category.created_on)).all()
         sizes = Size.query.order_by(desc(Size.created_on)).all()
-        return render_template('newgood.html', categories = categories, sizes=sizes,autor=autor)
+        return render_template('newgood.html', categories = categories, sizes=sizes,autor=autor,times=times)
 
 @app.route('/admin/sizes', methods = ['GET'])
 def sizes():
@@ -255,6 +258,7 @@ def edit(goods_id,date):
             good.fio = request.form['fio']
             good.autor = session['username']
             good.date = request.form['date']
+            good.description = request.form['description']
 
             if len(good.time) > 0 and len(good.orgname) < 256:
                 try:
@@ -268,7 +272,7 @@ def edit(goods_id,date):
         autor = session['username']
         categories = Category.query.order_by(desc(Category.created_on)).all()
         sizes = Size.query.order_by(desc(Size.created_on)).all()
-        return render_template('edit.html', categories=categories, sizes=sizes, autor=autor, good=good)
+        return render_template('edit.html', categories=categories, sizes=sizes, autor=autor, good=good, times=times)
 
 @app.route('/admin/goods/<string:date>/<int:goods_id>/delete', methods = ['GET'])
 def delete(goods_id,date):

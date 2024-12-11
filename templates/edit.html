@@ -12,8 +12,13 @@
 			</div>
 		{% endfor %}
 
-		Время<br>
-		<input type="text" name='time' value="{{good.time}}"><br>
+		Время посещения<br>
+		        <label for="time">Выберите:</label>
+          <select id="time" name="time">
+              {% for time in times %}
+            <option value="{{time}}">{{time}}</option>
+              {% endfor %}
+          </select><br><br>
 		Наименование организации<br>
 		<input type="text" name='orgname' value="{{good.orgname}}"><br><br>
 		Оплата<br>
@@ -38,6 +43,8 @@
 		<input type="text" name='phone' value="{{good.phone}}"><br>
 		ФИО руководителя группы<br>
 		<input type="text" name='fio' value="{{good.fio}}"><br>
+		Примечания<br>
+		<input type="text" name='description' value="{{good.description}}"><br>
 		<input type="submit" class='btn' value="Сохранить">
 		<br>
 	</form>
